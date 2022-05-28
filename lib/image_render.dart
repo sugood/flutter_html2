@@ -106,6 +106,7 @@ ImageRender networkImageRender({
   double? height,
   Widget Function(String?)? altWidget,
   Widget Function()? loadingWidget,
+  BoxFit? boxFit,
 }) =>
     (context, attributes, element) {
       final src = mapUrl?.call(_src(attributes)) ?? _src(attributes)!;
@@ -122,7 +123,7 @@ ImageRender networkImageRender({
           } else {
             return child;
           }
-        });
+        },fit: boxFit != null ? boxFit : BoxFit.none);
 
         ImageStreamListener? listener;
         listener = ImageStreamListener((ImageInfo imageInfo, bool synchronousCall) {
@@ -168,7 +169,7 @@ ImageRender networkImageRender({
                               style: context.style.generateTextStyle());
                     }
                     return child;
-                  },
+                  },fit: boxFit != null ? boxFit : BoxFit.none,
                 ),
               ),
             );
